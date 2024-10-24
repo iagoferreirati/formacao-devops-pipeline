@@ -14,7 +14,6 @@ terraform {
 # Bucket S3 que servirá como website
 resource "aws_s3_bucket" "website_bucket" {
   bucket = "formacao-devops-pipeline"  # Nome único do bucket S3
-
   website {
     index_document = "index.html"        # Define o arquivo de índice principal
   }
@@ -34,4 +33,9 @@ resource "aws_s3_bucket_object" "index_html" {
 
 output "bucket_website_url" {
   value = aws_s3_bucket.website_bucket.website_endpoint  # URL do bucket para acessar o site
+}
+
+resource "aws_s3_bucket_acl" "example" {
+  bucket = aws_s3_bucket.website_bucket.id
+  acl    = "public-read"
 }
