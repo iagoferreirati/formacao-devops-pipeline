@@ -19,6 +19,10 @@ resource "aws_s3_bucket" "website_bucket" {
     index_document = "index.html"        # Define o arquivo de índice principal
   }
 
+  # Desativa o bloqueio de ACLs públicas
+  block_public_acls   = false
+  block_public_policy = false
+
   tags = {
     Name        = "formacao-devops-pipeline"
     Environment = "Development"
